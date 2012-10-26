@@ -13,7 +13,10 @@ def s3_upload(source_file,acl='public-read'):
             S3_BUCKET           :   What bucket to upload to
             S3_UPLOAD_DIRECTORY :   Which S3 Directory.
 
-        By default sets the access rights on the uploaded file to public-read
+        The default sets the access rights on the uploaded file to
+        public-read.  It also generates a unique filename via
+        the uuid4 function combined with the file extension from
+        the source file.
     '''
 
     source_filename = secure_filename(source_file.data.filename)
