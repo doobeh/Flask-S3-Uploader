@@ -1,5 +1,8 @@
 from flask import Flask, render_template, flash
-from flask.ext.wtf import FileField, Form
+from flask_wtf import Form
+from flask_wtf.file import FileField
+from wtforms import TextField
+from wtforms.validators import DataRequired
 from tools import s3_upload
 
 app = Flask(__name__)
