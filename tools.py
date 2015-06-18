@@ -30,7 +30,7 @@ def s3_upload(source_file, acl='public-read'):
     b = conn.get_bucket(app.config["S3_BUCKET"])
 
     sml = b.new_key("/".join([app.config["S3_UPLOAD_DIRECTORY"], destination_filename]))
-    sml.set_contents_from_string(source_file.data.readlines())
+    sml.set_contents_from_string(source_file.data.read())
     sml.set_acl(acl)
 
     return destination_filename
