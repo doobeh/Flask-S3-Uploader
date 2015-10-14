@@ -5,7 +5,7 @@ from flask import current_app as app
 from werkzeug.utils import secure_filename
 
 
-def s3_upload(source_file, acl='public-read'):
+def s3_upload(source_file, upload_dir=app.config["S3_UPLOAD_DIRECTORY"], acl='public-read'):
     """ Uploads WTForm File Object to Amazon S3
 
         Expects following app.config attributes to be set:
@@ -29,7 +29,7 @@ def s3_upload(source_file, acl='public-read'):
     conn = boto.connect_s3(app.config["S3_KEY"], app.config["S3_SECRET"])
     b = conn.get_bucket(app.config["S3_BUCKET"])
 
-    sml = b.new_key("/".join([app.config["S3_UPLOAD_DIRECTORY"], destination_filename]))
+    sml = b.new_key("/".join([upload_dir, destination_filename]))
     sml.set_contents_from_string(source_file.data.read())
     sml.set_acl(acl)
 
